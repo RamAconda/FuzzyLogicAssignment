@@ -12,6 +12,10 @@ public class Variable {
 	private ArrayList<Set> sets;
 	private HashMap<String , Double> membership;
 	
+	public Variable(){
+		membership = new HashMap<>();
+		sets = new ArrayList<>();
+	}
 	public double getValue() {
 		return value;
 	}
@@ -26,6 +30,13 @@ public class Variable {
 	}
 	public HashMap<String, Double> getMembership() {
 		return (HashMap<String, Double>) membership.clone();
+	}
+	
+	public void addMembership(String setName , Double mem){
+		membership.put(setName, mem);
+	}
+	public Double getMembership(String setName){
+		return membership.get(setName);
 	}
 	
 	public void setSets() {
@@ -51,8 +62,30 @@ public class Variable {
 	public void makeVariable(){
 		Scanner in = new Scanner(System.in);
 		setName(in.next());
+		//in = new Scanner(System.in);
 		setValue(in.nextDouble());
+		in = new Scanner(System.in);
 		setSets();
 		setMembership();
+	}
+	
+	public void makeOutVar() {
+		Scanner in = new Scanner(System.in);
+		setName(in.next());
+		in = new Scanner(System.in);
+		setSets();
+	}
+	
+	public Double outputDefuzzification(){
+		Double memSum=0.0; // memberships summition 
+		Double thePast = 0.0; // البسط بتاع الكسر في المعادله
+		for(int i = 0 ; i < sets.size() ; i++){
+			String setName = sets.get(i).getName();
+			Double setMax = sets.get(i).getMaxBoundry();
+			Double setMem = membership.get(setName);
+			memSum += setMem;
+			thePast += setMax*setMem;
+		}
+		return thePast/memSum;
 	}
 }

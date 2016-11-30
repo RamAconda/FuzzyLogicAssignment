@@ -8,6 +8,10 @@ public class Set {
 	private String name;
 	private ArrayList<Double> boundries;
 	
+	public Set(){
+		boundries = new ArrayList<>();
+	}
+	
 	public boolean getType() {
 		return type;
 	}
@@ -30,8 +34,6 @@ public class Set {
 		if(type == true)
 			boundries.add(in.nextDouble());
 	}
-	
-	
 	
 	public double membership(double value){
 		if(type == true) //trapezoidal
@@ -64,10 +66,16 @@ public class Set {
 	public void makeSet(){
 		Scanner in = new Scanner(System.in);
 		setName(in.next());
+		//in = new Scanner(System.in);
 		String ty = in.next();
 		if(ty == "triangle") setType(false);
 		else setType(true);
+		in = new Scanner(System.in);
 		setBoundries();
 		
+	}
+	
+	public Double getMaxBoundry(){
+		return boundries.get(1); // max boundry .
 	}
 }
