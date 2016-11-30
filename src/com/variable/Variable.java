@@ -48,4 +48,11 @@ public class Variable {
 		}
 	}
 	
+	public void makeVariable(){
+		Scanner in = new Scanner(System.in);
+		setName(in.next());
+		setValue(in.nextDouble());
+		setSets();
+		setMembership();
+	}
 }
